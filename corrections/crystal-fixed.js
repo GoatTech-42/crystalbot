@@ -11,13 +11,40 @@ function crystalDamage (dist, difficulty = 'HARD', exposure = 1) {
 function crystalHp (dist, gear = NONE, difficulty = 'HARD', exposure = 1) {
   return v.singleHit(dist, gear, { exposure, difficulty }).hp
 }
+// Chain totals are order-dependent post-armor (invulnerability gate + f32 round-trips). For
+// n <= EXACT_MAX_N every unique ordering of the distance multiset is evaluated (equal distances
+// are interchangeable), so min/max are exact within this f32 model. Above it, the previous
+// two extremal-order estimate is kept (nearest-first max, farthest-first min); for n > EXACT_MAX_N
+// min/max remain order-based estimates, not proven bounds.
+const EXACT_MAX_N = 8
+function uniquePermutations (xs) {
+  const a = [...xs].sort((x, y) => x - y), used = new Array(a.length).fill(false), out = [], cur = []
+  const rec = () => {
+    if (cur.length === a.length) { out.push([...cur]); return }
+    for (let i = 0; i < a.length; i++) {
+      if (used[i] || (i > 0 && a[i] === a[i - 1] && !used[i - 1])) continue
+      used[i] = true; cur.push(a[i]); rec(); cur.pop(); used[i] = false
+    }
+  }
+  rec()
+  return out
+}
 function chainDamage (dists, gear = NONE, difficulty = 'HARD', exposure = 1, health = 20) {
   const ds = (Array.isArray(dists) ? dists : []).filter(d => Number.isFinite(d) && d >= 0 && d <= 12)
   if (ds.length === 0) return { min: 0, max: 0, hits: [] }
+  const run = order => v.chainHits(order.map(dist => ({ dist, ticks: 0 })), gear, { exposure, difficulty, health })
+  if (ds.length <= EXACT_MAX_N) {
+    let lo = null, hi = null
+    for (const order of uniquePermutations(ds)) {
+      const r = run(order)
+      if (!lo || r.totalHp < lo.totalHp) lo = r
+      if (!hi || r.totalHp > hi.totalHp) hi = r
+    }
+    return { min: lo.totalHp, max: hi.totalHp, hits: hi.hits }
+  }
   const pre = d => v.applyDifficulty(v.rawExplosionDamage(d, { exposure }), difficulty)
   const nearFirst = [...ds].sort((a, b) => pre(b) - pre(a))
   const farFirst = [...ds].sort((a, b) => pre(a) - pre(b))
-  const run = order => v.chainHits(order.map(dist => ({ dist, ticks: 0 })), gear, { exposure, difficulty, health })
   const hi = run(nearFirst), lo = run(farFirst)
   return { min: lo.totalHp, max: hi.totalHp, hits: hi.hits }
 }
