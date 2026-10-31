@@ -49,6 +49,34 @@ eq('C5.ticks9.gated', v.chainHits([{ dist: 5, ticks: 0 }, { dist: 5, ticks: 9 }]
   eq('C8.single.pinned', sgl, 2.9767699241638184)
   eq('C8.chain.pinned', chn, 2.9767704010009766)
   eq('C8.roundTripDiffers', Object.is(sgl, chn), false) }
+// X-group: exact small-chain evaluation (n <= 8). Exact min/max must contain every individual
+// ordering's total; compare against the previous two extremal-order estimate (inline here).
+const twoOrder = (dists) => {
+  const pre = d => v.applyDifficulty(v.rawExplosionDamage(d, { exposure: 1 }), 'HARD')
+  const run = order => v.chainHits(order.map(dist => ({ dist, ticks: 0 })), gear, { exposure: 1, difficulty: 'HARD', health: 20 })
+  const near = [...dists].sort((a, b) => pre(b) - pre(a)), far = [...dists].sort((a, b) => pre(a) - pre(b))
+  return { lo: run(far).totalHp, hi: run(near).totalHp }
+}
+let lcg = 0x2f6e2b1
+const rnd = () => (lcg = (lcg * 1103515245 + 12345) & 0x7fffffff) / 0x7fffffff
+let widenMax = 0, widenCount = 0
+for (let t = 0; t < 200; t++) {
+  const n = 2 + Math.floor(rnd() * 7)
+  const ds = Array.from({ length: n }, () => Math.fround(0.5 + rnd() * 11.5))
+  const c = cf.chainDamage(ds, gear), o = twoOrder(ds)
+  if (!(c.min <= o.lo && c.max >= o.hi)) { fail++; console.log(`FAIL X1.contain t=${t} ds=${ds}`) } else pass++
+  const w = Math.max(o.lo - c.min, c.max - o.hi)
+  if (w > 0) { widenCount++; if (w > widenMax) widenMax = w }
+}
+console.log(`X1.report: ${widenCount}/200 seeded chains where exact bounds are wider than the two-order estimate; max widening ${widenMax}`)
+{ const ds = [7.2, 3.1, 9.9, 5.5, 2, 6]
+  const a = cf.chainDamage(ds, gear), b = cf.chainDamage([...ds].reverse(), gear)
+  eq('X2.orderIndependent.min', Object.is(a.min, b.min), true); eq('X2.orderIndependent.max', Object.is(a.max, b.max), true) }
+{ const ds9 = [7.2, 3.1, 9.9, 5.5, 2, 6, 4, 8, 10]
+  const c = cf.chainDamage(ds9, gear), o = twoOrder(ds9)
+  eq('X3.fallback.min', c.min, o.lo); eq('X3.fallback.max', c.max, o.hi) }
+{ const c = cf.chainDamage([5, 5, 5, 5, 5, 5, 5, 5], gear)
+  eq('X5.allEqualSingleOrder', Object.is(c.min, c.max), true) }
 eq('E1.easy', v.applyDifficulty(10, 'EASY'), Math.min(Math.fround(Math.fround(10 / 2) + 1), 10))
 eq('E1.normal', v.applyDifficulty(10, 'NORMAL'), 10)
 eq('E1.peaceful', v.applyDifficulty(10, 'PEACEFUL'), 0)
