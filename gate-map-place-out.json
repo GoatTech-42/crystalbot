@@ -1,0 +1,518 @@
+{
+ "meta": {
+  "note": "offline model-vs-model PLACE-gate comparison; correction candidate is not ground truth; no server run",
+  "seed": 48879,
+  "scenarios": 2000,
+  "selectionSubset": 500,
+  "keep": 6,
+  "ks": [
+   1,
+   2,
+   3
+  ],
+  "healths": [
+   20,
+   18,
+   16,
+   14,
+   12,
+   10,
+   8,
+   6,
+   4
+  ],
+  "difficulty": "HARD",
+  "exposure": 1,
+  "assumptions": "los=true, airAbove=true, flat world, no absorb/resist/totems",
+  "distribution": "chosen close-range synthetic cluster, not empirical duel / not observed live-cap data",
+  "dirA": "model-vs-model: earlier model gate permits, correction candidate cautious gate (max bound) refuses - not ground truth, not proof of any fix",
+  "dirB": "model-vs-model: earlier model gate refuses, correction candidate cautious gate permits - not ground truth"
+ },
+ "gears": {
+  "duel_bp4": {
+   "1": {
+    "bothPermit": 644,
+    "bothForbid": 84,
+    "dirA": 326,
+    "dirB": 16,
+    "noCandidate": 180,
+    "capBlocked": 750,
+    "dirAByHealth": {
+     "10": 252,
+     "12": 443,
+     "14": 624,
+     "16": 771,
+     "18": 607
+    },
+    "dirBByHealth": {
+     "16": 1,
+     "18": 7
+    },
+    "dirAExamples": [
+     {
+      "scen": "0.5,1.75|ex:1.5,2.75,2.75;-0.75,1,1.75|b:0.75,0,1.5;0.75,1,3|cap3",
+      "health": 20,
+      "k": 1,
+      "prodBestSd": 12.175199999999997,
+      "corrMinMaxSd": 16.06949806213379
+     },
+     {
+      "scen": "-2.25,-3|ex:-3.5,2.5,-1.75;-2.75,1.75,-1.75|b:-1.5,0,-2|cap4",
+      "health": 20,
+      "k": 1,
+      "prodBestSd": 12.203999999999997,
+      "corrMinMaxSd": 16.27750587463379
+     },
+     {
+      "scen": "0.75,-1.5|ex:|b:-0.25,0,-0.5;1.75,1,-0.75;-0.5,1,-0.75;1.25,1,-1.75|cap3",
+      "health": 20,
+      "k": 1,
+      "prodBestSd": 4.502399999999999,
+      "corrMinMaxSd": 14.09775161743164
+     },
+     {
+      "scen": "2.5,-2.5|ex:|b:3.25,0,-3.75;2,0,-1.5|cap3",
+      "health": 20,
+      "k": 1,
+      "prodBestSd": 4.767599999999999,
+      "corrMinMaxSd": 14.42631721496582
+     },
+     {
+      "scen": "-1.5,-1.5|ex:-2.5,1.5,-0.75|b:-1.5,1,-2.25;-1.25,0,-0.25;-0.75,1,-1.5;-2,1,-1.5|cap4",
+      "health": 20,
+      "k": 1,
+      "prodBestSd": 9.269999999999998,
+      "corrMinMaxSd": 14.499398231506348
+     }
+    ],
+    "dirBExamples": [
+     {
+      "scen": "1.25,-3.25|ex:0.5,1.25,-3.25;0.75,1.25,-2.75;1.75,2.25,-2.75|b:0,0,-3.5|cap4",
+      "health": 20,
+      "k": 1,
+      "corrBestSd": 13.896422386169434,
+      "prodMinSd": 16.253999999999998
+     },
+     {
+      "scen": "-1,-3|ex:-0.75,2.75,-2.25;-2,1.75,-2.75;-2,2.25,-2.25|b:0,1,-4.25;-2,0,-3;0,1,-2.75;-1,0,-3.75|cap4",
+      "health": 20,
+      "k": 1,
+      "corrBestSd": 13.01016902923584,
+      "prodMinSd": 15.243599999999997
+     },
+     {
+      "scen": "1,3.5|ex:0.75,1.5,3.25;0.75,1.75,3;2,2.5,2.75|b:2.25,0,2.25;-0.25,1,3.25;1,0,4.25;0,0,4.5|cap4",
+      "health": 20,
+      "k": 1,
+      "corrBestSd": 12.583889961242676,
+      "prodMinSd": 14.541599999999997
+     },
+     {
+      "scen": "-2.75,-0.75|ex:-3.5,1.5,-1.5;-1.75,2.75,-0.25;-2.75,2.5,-1|b:-3.75,1,0;-3,0,0.25;-2.25,1,0.25;-4,1,-0.25|cap4",
+      "health": 20,
+      "k": 1,
+      "corrBestSd": 13.555295944213867,
+      "prodMinSd": 14.555999999999996
+     },
+     {
+      "scen": "-3,2.5|ex:-3.5,2.25,1.5;-3,1.75,1.75;-2.5,1,2.25|b:-2.75,0,2.75|cap4",
+      "health": 20,
+      "k": 1,
+      "corrBestSd": 12.744951248168945,
+      "prodMinSd": 14.083199999999996
+     }
+    ]
+   },
+   "2": {
+    "bothPermit": 0,
+    "bothForbid": 551,
+    "dirA": 519,
+    "dirB": 0,
+    "noCandidate": 180,
+    "capBlocked": 750,
+    "dirAByHealth": {
+     "14": 252,
+     "16": 368,
+     "18": 443
+    },
+    "dirBByHealth": {},
+    "dirAExamples": [
+     {
+      "scen": "2,0.5|ex:|b:3,0,1.5;2,1,0.5;2.25,0,0.5;2.5,0,1.5|cap4",
+      "health": 20,
+      "k": 2,
+      "prodBestSd": 6.568799999999999,
+      "corrMinMaxSd": 21.086238861083984
+     },
+     {
+      "scen": "1.75,0.25|ex:|b:1.5,1,0.75;0.5,0,1;2.5,0,1|cap3",
+      "health": 20,
+      "k": 2,
+      "prodBestSd": 7.987199999999998,
+      "corrMinMaxSd": 25.555173873901367
+     },
+     {
+      "scen": "2.5,-0.25|ex:|b:1.5,1,0.5;3,1,0|cap4",
+      "health": 20,
+      "k": 2,
+      "prodBestSd": 7.027199999999998,
+      "corrMinMaxSd": 21.673505783081055
+     },
+     {
+      "scen": "2,-1.75|ex:|b:2,1,-1.5;1.5,1,-1.25|cap4",
+      "health": 20,
+      "k": 2,
+      "prodBestSd": 8.4888,
+      "corrMinMaxSd": 26.640628814697266
+     },
+     {
+      "scen": "0.75,-1.5|ex:|b:-0.25,0,-0.5;1.75,1,-0.75;-0.5,1,-0.75;1.25,1,-1.75|cap3",
+      "health": 20,
+      "k": 2,
+      "prodBestSd": 9.004799999999998,
+      "corrMinMaxSd": 28.19550323486328
+     }
+    ],
+    "dirBExamples": []
+   },
+   "3": {
+    "bothPermit": 0,
+    "bothForbid": 737,
+    "dirA": 333,
+    "dirB": 0,
+    "noCandidate": 180,
+    "capBlocked": 750,
+    "dirAByHealth": {
+     "16": 72,
+     "18": 252
+    },
+    "dirBByHealth": {},
+    "dirAExamples": [
+     {
+      "scen": "2,0.5|ex:|b:3,0,1.5;2,1,0.5;2.25,0,0.5;2.5,0,1.5|cap4",
+      "health": 20,
+      "k": 3,
+      "prodBestSd": 9.853199999999998,
+      "corrMinMaxSd": 31.629358291625977
+     },
+     {
+      "scen": "1.75,0.25|ex:|b:1.5,1,0.75;0.5,0,1;2.5,0,1|cap3",
+      "health": 20,
+      "k": 3,
+      "prodBestSd": 11.980799999999997,
+      "corrMinMaxSd": 38.33276081085205
+     },
+     {
+      "scen": "2.5,-0.25|ex:|b:1.5,1,0.5;3,1,0|cap4",
+      "health": 20,
+      "k": 3,
+      "prodBestSd": 10.540799999999997,
+      "corrMinMaxSd": 32.51025867462158
+     },
+     {
+      "scen": "2,-1.75|ex:|b:2,1,-1.5;1.5,1,-1.25|cap4",
+      "health": 20,
+      "k": 3,
+      "prodBestSd": 12.7332,
+      "corrMinMaxSd": 39.9609432220459
+     },
+     {
+      "scen": "0.75,-1.5|ex:|b:-0.25,0,-0.5;1.75,1,-0.75;-0.5,1,-0.75;1.25,1,-1.75|cap3",
+      "health": 20,
+      "k": 3,
+      "prodBestSd": 13.507199999999997,
+      "corrMinMaxSd": 42.29325485229492
+     }
+    ],
+    "dirBExamples": []
+   }
+  },
+  "no_blast": {
+   "1": {
+    "bothPermit": 0,
+    "bothForbid": 1070,
+    "dirA": 0,
+    "dirB": 0,
+    "noCandidate": 180,
+    "capBlocked": 750,
+    "dirAByHealth": {},
+    "dirBByHealth": {},
+    "dirAExamples": [],
+    "dirBExamples": []
+   },
+   "2": {
+    "bothPermit": 0,
+    "bothForbid": 1070,
+    "dirA": 0,
+    "dirB": 0,
+    "noCandidate": 180,
+    "capBlocked": 750,
+    "dirAByHealth": {},
+    "dirBByHealth": {},
+    "dirAExamples": [],
+    "dirBExamples": []
+   },
+   "3": {
+    "bothPermit": 0,
+    "bothForbid": 1070,
+    "dirA": 0,
+    "dirB": 0,
+    "noCandidate": 180,
+    "capBlocked": 750,
+    "dirAByHealth": {},
+    "dirBByHealth": {},
+    "dirAExamples": [],
+    "dirBExamples": []
+   }
+  },
+  "unarmored": {
+   "1": {
+    "bothPermit": 0,
+    "bothForbid": 1070,
+    "dirA": 0,
+    "dirB": 0,
+    "noCandidate": 180,
+    "capBlocked": 750,
+    "dirAByHealth": {},
+    "dirBByHealth": {},
+    "dirAExamples": [],
+    "dirBExamples": []
+   },
+   "2": {
+    "bothPermit": 0,
+    "bothForbid": 1070,
+    "dirA": 0,
+    "dirB": 0,
+    "noCandidate": 180,
+    "capBlocked": 750,
+    "dirAByHealth": {},
+    "dirBByHealth": {},
+    "dirAExamples": [],
+    "dirBExamples": []
+   },
+   "3": {
+    "bothPermit": 0,
+    "bothForbid": 1070,
+    "dirA": 0,
+    "dirB": 0,
+    "noCandidate": 180,
+    "capBlocked": 750,
+    "dirAByHealth": {},
+    "dirBByHealth": {},
+    "dirAExamples": [],
+    "dirBExamples": []
+   }
+  }
+ },
+ "maxPairDist": 4.69,
+ "selection": {
+  "note": "first 500 scenarios only, both models permit at least one place action; differing picks include cross-evaluated scores so tie-level (sum-order ~1e-15) and material ranking disagreements are distinguishable",
+  "gears": {
+   "duel_bp4": {
+    "1/20": {
+     "compared": 150,
+     "samePos": 125,
+     "diffPos": 25,
+     "diffExamples": [
+      {
+       "k": 1,
+       "health": 20,
+       "prodPick": {
+        "x": 2.25,
+        "y": 0,
+        "z": 0.5
+       },
+       "corrPick": {
+        "x": 3,
+        "y": 0,
+        "z": 1.5
+       },
+       "prodScoreProdPick": 2.3232,
+       "prodScoreCorrPick": 2.0352,
+       "corrScoreCorrPick": 5.075709342956543,
+       "corrScoreProdPick": 4.050392150878906
+      },
+      {
+       "k": 1,
+       "health": 20,
+       "prodPick": {
+        "x": 1.25,
+        "y": 0,
+        "z": 0.5
+       },
+       "corrPick": {
+        "x": 2.25,
+        "y": 1,
+        "z": -1
+       },
+       "prodScoreProdPick": 1.5059999999999993,
+       "prodScoreCorrPick": 1.3260000000000005,
+       "corrScoreCorrPick": 2.7963809967041016,
+       "corrScoreProdPick": 2.32784366607666
+      },
+      {
+       "k": 1,
+       "health": 20,
+       "prodPick": {
+        "x": 1.75,
+        "y": 0,
+        "z": 0
+       },
+       "corrPick": {
+        "x": 2.5,
+        "y": 1,
+        "z": 0.25
+       },
+       "prodScoreProdPick": 1.7855999999999996,
+       "prodScoreCorrPick": 1.5696000000000003,
+       "corrScoreCorrPick": 3.43703556060791,
+       "corrScoreProdPick": 3.0535993576049805
+      },
+      {
+       "k": 1,
+       "health": 20,
+       "prodPick": {
+        "x": 0,
+        "y": 0,
+        "z": 2.75
+       },
+       "corrPick": {
+        "x": 1,
+        "y": 0,
+        "z": 2.75
+       },
+       "prodScoreProdPick": 4.609199999999998,
+       "prodScoreCorrPick": 4.544399999999998,
+       "corrScoreCorrPick": 4.495516777038574,
+       "corrScoreProdPick": 3.771540641784668
+      },
+      {
+       "k": 1,
+       "health": 20,
+       "prodPick": {
+        "x": -0.5,
+        "y": 0,
+        "z": 2.25
+       },
+       "corrPick": {
+        "x": 1.25,
+        "y": 0,
+        "z": 2.75
+       },
+       "prodScoreProdPick": 2.645999999999999,
+       "prodScoreCorrPick": 2.451599999999999,
+       "corrScoreCorrPick": 5.559840202331543,
+       "corrScoreProdPick": 4.246870994567871
+      }
+     ]
+    },
+    "1/14": {
+     "compared": 0,
+     "samePos": 0,
+     "diffPos": 0,
+     "diffExamples": []
+    },
+    "1/10": {
+     "compared": 0,
+     "samePos": 0,
+     "diffPos": 0,
+     "diffExamples": []
+    },
+    "3/20": {
+     "compared": 0,
+     "samePos": 0,
+     "diffPos": 0,
+     "diffExamples": []
+    },
+    "3/14": {
+     "compared": 0,
+     "samePos": 0,
+     "diffPos": 0,
+     "diffExamples": []
+    },
+    "3/10": {
+     "compared": 0,
+     "samePos": 0,
+     "diffPos": 0,
+     "diffExamples": []
+    }
+   },
+   "no_blast": {
+    "1/20": {
+     "compared": 0,
+     "samePos": 0,
+     "diffPos": 0,
+     "diffExamples": []
+    },
+    "1/14": {
+     "compared": 0,
+     "samePos": 0,
+     "diffPos": 0,
+     "diffExamples": []
+    },
+    "1/10": {
+     "compared": 0,
+     "samePos": 0,
+     "diffPos": 0,
+     "diffExamples": []
+    },
+    "3/20": {
+     "compared": 0,
+     "samePos": 0,
+     "diffPos": 0,
+     "diffExamples": []
+    },
+    "3/14": {
+     "compared": 0,
+     "samePos": 0,
+     "diffPos": 0,
+     "diffExamples": []
+    },
+    "3/10": {
+     "compared": 0,
+     "samePos": 0,
+     "diffPos": 0,
+     "diffExamples": []
+    }
+   },
+   "unarmored": {
+    "1/20": {
+     "compared": 0,
+     "samePos": 0,
+     "diffPos": 0,
+     "diffExamples": []
+    },
+    "1/14": {
+     "compared": 0,
+     "samePos": 0,
+     "diffPos": 0,
+     "diffExamples": []
+    },
+    "1/10": {
+     "compared": 0,
+     "samePos": 0,
+     "diffPos": 0,
+     "diffExamples": []
+    },
+    "3/20": {
+     "compared": 0,
+     "samePos": 0,
+     "diffPos": 0,
+     "diffExamples": []
+    },
+    "3/14": {
+     "compared": 0,
+     "samePos": 0,
+     "diffPos": 0,
+     "diffExamples": []
+    },
+    "3/10": {
+     "compared": 0,
+     "samePos": 0,
+     "diffPos": 0,
+     "diffExamples": []
+    }
+   }
+  }
+ }
+}
